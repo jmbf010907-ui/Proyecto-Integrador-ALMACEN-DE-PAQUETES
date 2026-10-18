@@ -1,0 +1,19 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Compilar
+        run: javac -d out $(find src tests -name "*.java")
+      - name: Pruebas
+        run: java -cp out PruebasAlmacen
+      - name: Demo (Main)
+        run: java -cp out app.Main
