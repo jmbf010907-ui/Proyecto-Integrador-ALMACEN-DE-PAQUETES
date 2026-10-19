@@ -11,22 +11,75 @@ Fecha de entrega: 18 de octubre
 ---
 
 ## 1. Revisión del primer avance  — Responsable: Juan Alejandro
-- Síntesis de la problemática:
-- Objetivos:
-- Alcance:
+- Síntesis de la problemática: La gestión de un almacén de paquetes presenta retrasos y errores en el movimiento de la mercancía, desde que entra hasta que sale para su entrega. Se busca reducir el tiempo y el margen de error en ese proceso.
+- Objetivos: Diseñar e implementar, a lo largo del semestre, un sistema de gestión de almacén que reduzca los tiempos de recorrido y procesamiento de paquetes mediante la automatización de la asignación de ubicaciones y la consolidación de envíos. Esta primera versión sienta las bases: el registro, la ubicación y el control de estado de los paquetes. La automatización y el algoritmo de optimización se incorporarán en avances posteriores.
+- Alcance: Incluido: registro de paquetes, información de remitentes y destinatarios, asignación y consulta de ubicaciones, control del estado de los paquetes y registro de entregas. Excluido en esta etapa: seguimiento GPS, rutas de transporte, pagos, compras en línea y comunicación con empresas de paquetería.
 - Ajustes realizados a partir de la retroalimentación:
+  - Del primer avance se pasaron a código seis de los siete objetos preliminares: Paquete, Remitente, Destinatario, Anaquel, Envio y Entrega.
+  - El objeto Operador no se implementó en esta etapa porque no aporta lógica propia todavía; queda como siguiente paso.
+  - Las ocho funcionalidades propuestas se concentraron en la clase de servicio GestorAlmacen; se demuestran dos de ellas, como pide el avance.
+  - Se agregó una carpeta de pruebas y un flujo automático de GitHub (CI) que compila y ejecuta el proyecto en cada cambio.
+  - Se hicieron cambios en el apartado de almacen, asi haciendo mejoras en ese apartado tal y como se menciono en la primera retroalimentación.
+
 
 ## 2. Catálogo de clases — Responsable: Juan Alejandro (modelo) y Roberto (servicio)
 Para cada clase: responsabilidad, atributos, métodos, relaciones.
 
 ### Paquete
-- Responsabilidad:
+- Responsabilidad: Representa un envío individual guardado en el almacén: su código, peso, estado, remitente, destinatario y anaquel asignado. Valida sus propios datos y inicia en estado EN_ALMACEN.
 - Atributos:
+  - `+EN_ALMACEN: String` {static, final}
+  - `+ENTREGADO: String` {static, final}
+  - `-codigo: String`
+  - `-pesoKg: double`
+  - `-estado: String`
+  - `-remitente: Remitente`
+  - `-destinatario: Destinatario`
+  - `-anaquel: Anaquel`
 - Métodos:
-- Relaciones:
+  - `+Paquete(codigo: String, pesoKg: double, remitente: Remitente, destinatario: Destinatario)`
+  - `+getCodigo(): String`
+  - `+getPesoKg(): double`
+  - `+getEstado(): String`
+  - `+getRemitente(): Remitente`
+  - `+getDestinatario(): Destinatario`
+  - `+getAnaquel(): Anaquel`
+  - `+setAnaquel(anaquel: Anaquel): void`
+  - `+setEstado(estado: String): void`
+  - `+toString(): String`
+- Validaciones: Código no vacío; peso mayor a 0; remitente y destinatario obligatorios (IllegalArgumentException).
+- Relaciones: Tiene un Remitente y un Destinatario; se guarda en 0..1 Anaquel; es el objeto principal de un Envio.
 
 ### Remitente
+- Responsabilidad: Representa a la persona o negocio que trae el paquete al almacén. Guarda sus datos de contacto y valida que sean correctos.
+- Atributos:
+  - `-nombre: String`
+  - `-telefono: String`
+- Métodos:
+  - `+Remitente(nombre: String, telefono: String)`
+  - `+getNombre(): String`
+  - `+getTelefono(): String`
+  - `+setNombre(nombre: String): void`
+  - `+setTelefono(telefono: String): void`
+  - `+toString(): String`
+- Validaciones: Nombre no vacío; teléfono de 10 dígitos (IllegalArgumentException). El constructor usa los setters, por lo que la validación está en un solo lugar.
+- Relaciones: Asociada con Paquete (un remitente puede tener varios paquetes; cada paquete tiene un remitente).
+
 ### Destinatario
+- Responsabilidad: Representa a la persona que recogerá el paquete. Guarda su nombre y teléfono y valida que sean correctos.
+- Atributos:
+  - `-nombre: String`
+  - `-telefono: String`
+- Métodos:
+  - `+Destinatario(nombre: String, telefono: String)`
+  - `+getNombre(): String`
+  - `+getTelefono(): String`
+  - `+setNombre(nombre: String): void`
+  - `+setTelefono(telefono: String): void`
+  - `+toString(): String`
+- Validaciones: Nombre no vacío; teléfono de 10 dígitos (IllegalArgumentException). El constructor usa los setters, por lo que la validación está en un solo lugar.
+- Relaciones: Asociada con Paquete (un destinatario puede recibir varios paquetes; cada paquete tiene un destinatario).
+
 ### Anaquel
 ### Envio
 ### Entrega
