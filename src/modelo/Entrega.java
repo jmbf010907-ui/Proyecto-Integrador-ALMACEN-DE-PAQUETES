@@ -2,7 +2,7 @@ package modelo;
 
 import java.time.LocalDate;
 
-/** Momento en que el paquete se entrega al destinatario. */
+/** Momento en que el paquete se entrega al destinatario: fecha y quién lo recibió. */
 public class Entrega {
     private LocalDate fecha;
     private String recibidoPor;
@@ -12,15 +12,17 @@ public class Entrega {
             throw new IllegalArgumentException("La fecha de entrega es obligatoria.");
         }
         if (recibidoPor == null || recibidoPor.isBlank()) {
-            throw new IllegalArgumentException("Debe indicarse quién recibió el paquete.");
+            throw new IllegalArgumentException("Se debe indicar quién recibe el paquete.");
         }
         this.fecha = fecha;
-        this.recibidoPor = recibidoPor;
+        this.recibidoPor = recibidoPor.trim();
     }
 
     public LocalDate getFecha() { return fecha; }
     public String getRecibidoPor() { return recibidoPor; }
 
     @Override
-    public String toString() { return "Entrega el " + fecha + " a " + recibidoPor; }
+    public String toString() {
+        return "Entrega el " + fecha + " a " + recibidoPor;
+    }
 }
