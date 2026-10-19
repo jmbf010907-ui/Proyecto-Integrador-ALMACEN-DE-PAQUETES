@@ -1,0 +1,33 @@
+digraph UML {
+  graph [rankdir=TB, nodesep=0.5, ranksep=0.7, fontname="Helvetica", bgcolor="white", pad=0.3];
+  node  [shape=record, fontname="Helvetica", fontsize=10, style=filled, fillcolor="#FFFDE7", color="#444444"];
+  edge  [fontname="Helvetica", fontsize=9, arrowhead=vee, color="#333333"];
+
+  Main [fillcolor="#E8F5E9", label="{Main|\l|+ main(args: String[]): void\l}"];
+
+  Gestor [fillcolor="#E3F2FD", label="{GestorAlmacen|- anaqueles: List\<Anaquel\>\l- envios: List\<Envio\>\l|+ GestorAlmacen(numeroAnaqueles: int)\l+ registrarPaquete(codigo: String, peso: double, r: Remitente,\l      d: Destinatario, fecha: LocalDate): Envio\l+ buscarPaquete(codigo: String): Paquete\l+ registrarEntrega(codigo: String, recibidoPor: String,\l      fecha: LocalDate): void\l+ getHistorial(): List\<Envio\>\l+ getPendientes(diasMinimos: int, hoy: LocalDate): List\<Envio\>\l+ getAnaqueles(): List\<Anaquel\>\l- buscarEnvio(codigo: String): Envio\l- buscarAnaquelLibre(): Anaquel\l}"];
+
+  Remitente [label="{Remitente|- nombre: String\l- telefono: String\l|+ Remitente(nombre: String, telefono: String)\l+ getNombre(): String\l+ getTelefono(): String\l+ setNombre(nombre: String): void\l+ setTelefono(telefono: String): void\l}"];
+
+  Destinatario [label="{Destinatario|- nombre: String\l- telefono: String\l|+ Destinatario(nombre: String, telefono: String)\l+ getNombre(): String\l+ getTelefono(): String\l+ setNombre(nombre: String): void\l+ setTelefono(telefono: String): void\l}"];
+
+  Paquete [label="{Paquete|+ EN_ALMACEN: String \{static, final\}\l+ ENTREGADO: String \{static, final\}\l- codigo: String\l- pesoKg: double\l- estado: String\l- remitente: Remitente\l- destinatario: Destinatario\l- anaquel: Anaquel\l|+ Paquete(codigo: String, pesoKg: double, remitente: Remitente,\l      destinatario: Destinatario)\l+ getCodigo(): String\l+ getPesoKg(): double\l+ getEstado(): String\l+ getRemitente(): Remitente\l+ getDestinatario(): Destinatario\l+ getAnaquel(): Anaquel\l+ setAnaquel(anaquel: Anaquel): void\l+ setEstado(estado: String): void\l}"];
+
+  Anaquel [label="{Anaquel|- codigo: String\l- paquete: Paquete\l|+ Anaquel(codigo: String)\l+ getCodigo(): String\l+ getPaquete(): Paquete\l+ estaLibre(): boolean\l+ ocupar(p: Paquete): void\l+ liberar(): void\l+ toString(): String\l}"];
+
+  Envio [label="{Envio|+ ACTIVO: String \{static, final\}\l+ CERRADO: String \{static, final\}\l- paquete: Paquete\l- fechaIngreso: LocalDate\l- fechaSalida: LocalDate\l- estado: String\l- entrega: Entrega\l|+ Envio(paquete: Paquete, fechaIngreso: LocalDate)\l+ getPaquete(): Paquete\l+ getFechaIngreso(): LocalDate\l+ getFechaSalida(): LocalDate\l+ getEstado(): String\l+ getEntrega(): Entrega\l+ estaActivo(): boolean\l+ cerrar(entrega: Entrega): void\l+ toString(): String\l}"];
+
+  Entrega [label="{Entrega|- fecha: LocalDate\l- recibidoPor: String\l|+ Entrega(fecha: LocalDate, recibidoPor: String)\l+ getFecha(): LocalDate\l+ getRecibidoPor(): String\l+ toString(): String\l}"];
+
+  Main -> Gestor [style=dashed, label="usa"];
+  Gestor -> Anaquel [arrowhead=odiamond, dir=both, arrowtail=none, headlabel="1..*", taillabel="1", labeldistance=2.2];
+  Gestor -> Envio   [arrowhead=odiamond, dir=both, arrowtail=none, headlabel="0..*", taillabel="1", labeldistance=2.2];
+  Envio -> Paquete  [label="paquete", headlabel="1", taillabel="0..1", labeldistance=2.2];
+  Envio -> Entrega  [label="entrega", headlabel="0..1", taillabel="1", labeldistance=2.2];
+  Paquete -> Remitente    [label="remitente", headlabel="1", taillabel="0..*", labeldistance=2.2];
+  Paquete -> Destinatario [label="destinatario", headlabel="1", taillabel="0..*", labeldistance=2.2];
+  Paquete -> Anaquel [dir=both, arrowtail=vee, label="anaquel / paquete", headlabel="0..1", taillabel="0..1", labeldistance=2.2];
+
+  {rank=same; Remitente; Destinatario}
+  {rank=same; Anaquel; Envio}
+}
