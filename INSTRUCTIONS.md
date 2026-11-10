@@ -18,6 +18,7 @@ Evolucionar el segundo avance para que distintos tipos de objetos compartan una 
 - 7 casos de prueba (P1 a P7) con estado inicial, acción, esperado, obtenido y evidencia.
 - UML actualizado (generalización hacia la clase base; la excepción hereda de `Exception`).
 
+
 ## Decisiones del equipo
 | Tema | Decisión |
 |---|---|
@@ -26,6 +27,7 @@ Evolucionar el segundo avance para que distintos tipos de objetos compartan una 
 | Regla estándar | 3 días gratis y 5 pesos por día |
 | Regla frágil | cargo de manejo + 12 pesos por día |
 | Excepción propia | `AlmacenLlenoException extends Exception` (paquete `excepciones`) |
+
 
 ## Reparto (cada quien edita solo sus archivos)
 | Integrante | Rama | Archivos | Reporte |
@@ -58,5 +60,6 @@ Evolucionar el segundo avance para que distintos tipos de objetos compartan una 
 - [ ] Commit de entrega anotado en el README y en el reporte.
 
 ## Pendientes (avances posteriores)
+
 - Asignación automática de anaqueles por dimensiones, peso o categoría, y consolidación de envíos.
-- Persistencia de datos (archivos o base de datos).
+
