@@ -20,7 +20,13 @@ public class Anaquel {
         return paquete == null;
     }
 
-    /** Guarda un paquete en el anaquel. No permite paquetes nulos ni anaqueles ocupados. */
+    /**
+     * Guarda un paquete en el anaquel. Valida ANTES de cambiar el estado: si la
+     * operación se rechaza, el anaquel queda exactamente como estaba.
+     *
+     * @throws IllegalArgumentException si el paquete es nulo
+     * @throws IllegalStateException    si el anaquel ya está ocupado
+     */
     public void ocupar(Paquete p) {
         if (p == null) {
             throw new IllegalArgumentException("No se puede ocupar un anaquel con un paquete nulo.");
@@ -31,8 +37,15 @@ public class Anaquel {
         this.paquete = p;
     }
 
-    /** Deja el anaquel libre para recibir otro paquete. */
+    /**
+     * Deja el anaquel libre para recibir otro paquete.
+     *
+     * @throws IllegalStateException si el anaquel ya estaba libre (cambio de estado inválido)
+     */
     public void liberar() {
+        if (estaLibre()) {
+            throw new IllegalStateException("El anaquel " + codigo + " ya está libre.");
+        }
         this.paquete = null;
     }
 
