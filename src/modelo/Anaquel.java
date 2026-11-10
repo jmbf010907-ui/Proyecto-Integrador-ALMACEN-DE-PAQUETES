@@ -1,6 +1,6 @@
 package modelo;
 
-/** Espacio físico del almacén donde se guarda un paquete. Sabe si está libre u ocupado. */
+/** Lugar del almacén donde se guarda un paquete. */
 public class Anaquel {
     private String codigo;
     private Paquete paquete;
@@ -15,12 +15,11 @@ public class Anaquel {
     public String getCodigo() { return codigo; }
     public Paquete getPaquete() { return paquete; }
 
-    /** Un anaquel está libre cuando no guarda ningún paquete. */
     public boolean estaLibre() {
         return paquete == null;
     }
 
-    /** Guarda un paquete en el anaquel. No permite paquetes nulos ni anaqueles ocupados. */
+    /** No acepta paquetes nulos ni anaqueles ocupados. */
     public void ocupar(Paquete p) {
         if (p == null) {
             throw new IllegalArgumentException("No se puede ocupar un anaquel con un paquete nulo.");
@@ -31,8 +30,11 @@ public class Anaquel {
         this.paquete = p;
     }
 
-    /** Deja el anaquel libre para recibir otro paquete. */
+    /** No se puede liberar un anaquel que ya está libre. */
     public void liberar() {
+        if (estaLibre()) {
+            throw new IllegalStateException("El anaquel " + codigo + " ya está libre.");
+        }
         this.paquete = null;
     }
 
