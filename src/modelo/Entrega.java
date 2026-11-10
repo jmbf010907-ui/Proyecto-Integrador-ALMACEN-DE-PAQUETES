@@ -2,7 +2,7 @@ package modelo;
 
 import java.time.LocalDate;
 
-/** Momento en que el paquete se entrega al destinatario: fecha y quién lo recibió. */
+/** Salida del paquete: fecha y quién lo recibió. */
 public class Entrega {
     private LocalDate fecha;
     private String recibidoPor;

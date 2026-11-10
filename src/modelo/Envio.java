@@ -2,7 +2,7 @@ package modelo;
 
 import java.time.LocalDate;
 
-/** Trámite de un paquete desde su ingreso hasta su salida del almacén. */
+/** Registro de un paquete desde que entra hasta que sale del almacén. */
 public class Envio {
     public static final String ACTIVO = "ACTIVO";
     public static final String CERRADO = "CERRADO";
@@ -35,7 +35,7 @@ public class Envio {
         return ACTIVO.equals(estado);
     }
 
-    /** Cierra el envío con su entrega. No se cierra dos veces ni con fecha anterior al ingreso. */
+    /** No se cierra dos veces ni con fecha anterior al ingreso. */
     public void cerrar(Entrega entrega) {
         if (!estaActivo()) {
             throw new IllegalStateException("El envío del paquete " + paquete.getCodigo() + " ya está cerrado.");

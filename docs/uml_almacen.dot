@@ -1,33 +1,33 @@
 digraph UML {
-  graph [rankdir=TB, nodesep=0.5, ranksep=0.7, fontname="Helvetica", bgcolor="white", pad=0.3];
-  node  [shape=record, fontname="Helvetica", fontsize=10, style=filled, fillcolor="#FFFDE7", color="#444444"];
-  edge  [fontname="Helvetica", fontsize=9, arrowhead=vee, color="#333333"];
+  rankdir=BT; nodesep=0.6; ranksep=0.9; splines=polyline;
+  graph [fontname="Arial"];
+  node [shape=record, fontname="Arial", fontsize=10, style=filled, fillcolor="#E0F2F1"];
+  edge [fontname="Arial", fontsize=9];
 
-  Main [fillcolor="#E8F5E9", label="{Main|\l|+ main(args: String[]): void\l}"];
+  Main [fillcolor="#FFF3E0", label="{app::Main|+ main(args: String[]) : void\l- demostrarPolimorfismo() : void\l}"];
+  Gestor [fillcolor="#E8EAF6", label="{servicio::GestorAlmacen|- anaqueles : List\<Anaquel\>\l- envios : List\<Envio\>\l|+ registrarPaquete(p: Paquete, fecha: LocalDate) : Envio\l+ buscarPaquete(codigo: String) : Paquete\l+ registrarEntrega(codigo, recibidoPor, fecha) : void\l+ calcularCostoAlmacenaje(codigo, hoy) : double\l+ getPendientes(dias, hoy) : List\<Envio\>\l+ getHistorial() : List\<Envio\>\l}"];
+  Exc [label="{excepciones::AlmacenLlenoException|+ AlmacenLlenoException(mensaje: String)\l}"];
+  Exception [fillcolor="#EEEEEE", label="{java.lang::Exception}"];
+  Paquete [label="{modelo::Paquete|- codigo : String\l- pesoKg : double\l- estado : String\l- remitente : Remitente\l- destinatario : Destinatario\l- anaquel : Anaquel\l|+ calcularCostoAlmacenaje(dias: int) : double\l# validarDias(dias: int) : void\l+ setEstado(estado: String) : void\l+ setAnaquel(a: Anaquel) : void\l}"];
+  Est [label="{modelo::PaqueteEstandar|- DIAS_GRATIS = 3\l- TARIFA_DIA = 5.0\l|+ calcularCostoAlmacenaje(dias: int) : double\l}"];
+  Fra [label="{modelo::PaqueteFragil|- cargoManejo : double\l- TARIFA_DIA = 12.0\l|+ calcularCostoAlmacenaje(dias: int) : double\l}"];
+  Rem [label="{modelo::Remitente|- nombre : String\l- telefono : String\l|+ setNombre(String) : void\l+ setTelefono(String) : void\l}"];
+  Des [label="{modelo::Destinatario|- nombre : String\l- telefono : String\l|+ setNombre(String) : void\l+ setTelefono(String) : void\l}"];
+  Ana [label="{modelo::Anaquel|- codigo : String\l- paquete : Paquete\l|+ ocupar(p: Paquete) : void\l+ liberar() : void\l+ estaLibre() : boolean\l}"];
+  Env [label="{modelo::Envio|- fechaIngreso : LocalDate\l- fechaSalida : LocalDate\l- estado : String\l- paquete : Paquete\l- entrega : Entrega\l|+ cerrar(e: Entrega) : void\l+ estaActivo() : boolean\l}"];
+  Ent [label="{modelo::Entrega|- fecha : LocalDate\l- recibidoPor : String\l}"];
 
-  Gestor [fillcolor="#E3F2FD", label="{GestorAlmacen|- anaqueles: List\<Anaquel\>\l- envios: List\<Envio\>\l|+ GestorAlmacen(numeroAnaqueles: int)\l+ registrarPaquete(codigo: String, peso: double, r: Remitente,\l      d: Destinatario, fecha: LocalDate): Envio\l+ buscarPaquete(codigo: String): Paquete\l+ registrarEntrega(codigo: String, recibidoPor: String,\l      fecha: LocalDate): void\l+ getHistorial(): List\<Envio\>\l+ getPendientes(diasMinimos: int, hoy: LocalDate): List\<Envio\>\l+ getAnaqueles(): List\<Anaquel\>\l- buscarEnvio(codigo: String): Envio\l- buscarAnaquelLibre(): Anaquel\l}"];
-
-  Remitente [label="{Remitente|- nombre: String\l- telefono: String\l|+ Remitente(nombre: String, telefono: String)\l+ getNombre(): String\l+ getTelefono(): String\l+ setNombre(nombre: String): void\l+ setTelefono(telefono: String): void\l}"];
-
-  Destinatario [label="{Destinatario|- nombre: String\l- telefono: String\l|+ Destinatario(nombre: String, telefono: String)\l+ getNombre(): String\l+ getTelefono(): String\l+ setNombre(nombre: String): void\l+ setTelefono(telefono: String): void\l}"];
-
-  Paquete [label="{Paquete|+ EN_ALMACEN: String \{static, final\}\l+ ENTREGADO: String \{static, final\}\l- codigo: String\l- pesoKg: double\l- estado: String\l- remitente: Remitente\l- destinatario: Destinatario\l- anaquel: Anaquel\l|+ Paquete(codigo: String, pesoKg: double, remitente: Remitente,\l      destinatario: Destinatario)\l+ getCodigo(): String\l+ getPesoKg(): double\l+ getEstado(): String\l+ getRemitente(): Remitente\l+ getDestinatario(): Destinatario\l+ getAnaquel(): Anaquel\l+ setAnaquel(anaquel: Anaquel): void\l+ setEstado(estado: String): void\l}"];
-
-  Anaquel [label="{Anaquel|- codigo: String\l- paquete: Paquete\l|+ Anaquel(codigo: String)\l+ getCodigo(): String\l+ getPaquete(): Paquete\l+ estaLibre(): boolean\l+ ocupar(p: Paquete): void\l+ liberar(): void\l+ toString(): String\l}"];
-
-  Envio [label="{Envio|+ ACTIVO: String \{static, final\}\l+ CERRADO: String \{static, final\}\l- paquete: Paquete\l- fechaIngreso: LocalDate\l- fechaSalida: LocalDate\l- estado: String\l- entrega: Entrega\l|+ Envio(paquete: Paquete, fechaIngreso: LocalDate)\l+ getPaquete(): Paquete\l+ getFechaIngreso(): LocalDate\l+ getFechaSalida(): LocalDate\l+ getEstado(): String\l+ getEntrega(): Entrega\l+ estaActivo(): boolean\l+ cerrar(entrega: Entrega): void\l+ toString(): String\l}"];
-
-  Entrega [label="{Entrega|- fecha: LocalDate\l- recibidoPor: String\l|+ Entrega(fecha: LocalDate, recibidoPor: String)\l+ getFecha(): LocalDate\l+ getRecibidoPor(): String\l+ toString(): String\l}"];
-
-  Main -> Gestor [style=dashed, label="usa"];
-  Gestor -> Anaquel [arrowhead=odiamond, dir=both, arrowtail=none, headlabel="1..*", taillabel="1", labeldistance=2.2];
-  Gestor -> Envio   [arrowhead=odiamond, dir=both, arrowtail=none, headlabel="0..*", taillabel="1", labeldistance=2.2];
-  Envio -> Paquete  [label="paquete", headlabel="1", taillabel="0..1", labeldistance=2.2];
-  Envio -> Entrega  [label="entrega", headlabel="0..1", taillabel="1", labeldistance=2.2];
-  Paquete -> Remitente    [label="remitente", headlabel="1", taillabel="0..*", labeldistance=2.2];
-  Paquete -> Destinatario [label="destinatario", headlabel="1", taillabel="0..*", labeldistance=2.2];
-  Paquete -> Anaquel [dir=both, arrowtail=vee, label="anaquel / paquete", headlabel="0..1", taillabel="0..1", labeldistance=2.2];
-
-  {rank=same; Remitente; Destinatario}
-  {rank=same; Anaquel; Envio}
+  Est -> Paquete [arrowhead=empty];
+  Fra -> Paquete [arrowhead=empty];
+  Exc -> Exception [arrowhead=empty];
+  Main -> Gestor [style=dashed, arrowhead=vee, label="usa"];
+  Main -> Exc [style=dashed, arrowhead=vee, label="captura"];
+  Gestor -> Exc [style=dashed, arrowhead=vee, label="lanza"];
+  Gestor -> Ana [arrowhead=odiamond, headlabel="1..*", labeldistance=2];
+  Gestor -> Env [arrowhead=odiamond, headlabel="0..*", labeldistance=2];
+  Env -> Paquete [arrowhead=vee, label="1"];
+  Env -> Ent [arrowhead=vee, headlabel="0..1", labeldistance=2];
+  Ana -> Paquete [arrowhead=vee, headlabel="0..1", labeldistance=2];
+  Paquete -> Rem [arrowhead=vee, headlabel="1", labeldistance=2];
+  Paquete -> Des [arrowhead=vee, headlabel="1", labeldistance=2];
 }
