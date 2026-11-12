@@ -76,4 +76,4 @@ Ejecutar `java -cp out PruebasAlmacen` cubre P1 a P6. Para P7 y las capturas del
 - Sánchez Navarro Rodrigo
 - Villa De Jesús Roberto
 
-Commit de entrega: _(anotar aquí el identificador del commit)_
+Último commit: Tercer Avance parcial
