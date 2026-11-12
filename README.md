@@ -15,7 +15,7 @@ src/
 ├── excepciones/     AlmacenLlenoException (excepción propia, hereda de Exception)
 └── app/             Main (menú de consola)
 tests/               PruebasAlmacen.java
-docs/                Reporte del tercer avance (PDF) y evidencias de consola
+docs/                UML (dot/png/svg), reporte del tercer avance y evidencias
 INSTRUCTIONS.md      Instrucciones del avance y reparto del equipo
 RUBRIC.md            Rúbrica de evaluación
 ```
@@ -32,8 +32,8 @@ java -cp out PruebasAlmacen
 ```
 
 ## Funcionalidades (menú de `app.Main`)
-1. Registrar paquete estándar (asigna anaquel libre).
-2. Registrar paquete frágil (asigna anaquel libre).
+1. Registrar paquete estándar con remitente y destinatario (asigna anaquel libre).
+2. Registrar paquete frágil con remitente y destinatario (asigna anaquel libre).
 3. Buscar paquete por código.
 4. Registrar entrega (cierra el envío y libera el anaquel).
 5. Calcular costo de almacenaje (método polimórfico).
@@ -69,8 +69,6 @@ Ejecutar `java -cp out PruebasAlmacen` cubre P1 a P6. Para P7 y las capturas del
 
 ## Limitaciones conocidas
 - Los datos solo existen en memoria; al cerrar el programa se pierden.
-- La clase `Operador` del primer avance aún no está implementada.
-- Los estados se manejan como cadenas constantes (las enumeraciones quedan pendientes).
 
 ## Integrantes
 - Bolaños Fuentes Juan Manuel
@@ -78,3 +76,4 @@ Ejecutar `java -cp out PruebasAlmacen` cubre P1 a P6. Para P7 y las capturas del
 - Sánchez Navarro Rodrigo
 - Villa De Jesús Roberto
 
+Commit de entrega: _(anotar aquí el identificador del commit)_

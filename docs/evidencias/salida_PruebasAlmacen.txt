@@ -1,0 +1,60 @@
+--- P1 y P2: polimorfismo (referencia Paquete, dos objetos distintos) ---
+[OK]    P1 Estándar a 5 días cobra 2 días (3 gratis): 10.0
+[OK]    P1 Estándar a 2 días es gratis: 0.0
+[OK]    P2 Frágil a 5 días: 20 + 5*12 = 80.0
+[OK]    P2 Mismo método, resultado distinto por tipo de objeto
+[OK]    Días negativos rechazados
+--- P3: formato incorrecto ---
+[OK]    P3 Texto 'abc' en un peso lanza NumberFormatException
+--- P4: valores fuera de las reglas ---
+[OK]    P4 Peso 0 rechazado
+[OK]    P4 Peso negativo rechazado
+[OK]    P4 Peso NaN rechazado
+[OK]    P4 Código vacío rechazado
+[OK]    P4 Remitente nulo rechazado
+[OK]    P4 Destinatario nulo rechazado
+[OK]    P4 Teléfono de 9 dígitos rechazado
+[OK]    P4 Cargo de manejo negativo rechazado
+--- Registro correcto ---
+[OK]    Registrar: el paquete existe
+[OK]    Registrar: estado EN_ALMACEN
+[OK]    Registrar: anaquel A-01 asignado
+[OK]    Registrar: envío ACTIVO
+[OK]    Pendientes: aparece con 3+ días
+--- P5: excepción propia (almacén lleno) y estado conservado ---
+[OK]    P5 Estado antes: 1 envío y A-01 ocupado
+[OK]    P5 Segundo registro lanza AlmacenLlenoException
+[OK]    P5 Estado después: sigue 1 envío
+[OK]    P5 Estado después: A-01 sigue con PQ-001
+[OK]    P5 El paquete rechazado no quedó registrado
+--- Rechazos que no deben dejar anaqueles ocupados ---
+[OK]    Fecha nula rechazada
+[OK]    Fecha nula: ningún anaquel ocupado y ningún envío
+[OK]    Paquete nulo rechazado
+[OK]    Paquete nulo: ningún anaquel ocupado
+[OK]    Código duplicado rechazado
+[OK]    Duplicado: solo un anaquel ocupado
+--- Protección del estado del anaquel y del paquete ---
+[OK]    Liberar un anaquel libre lanza IllegalStateException
+[OK]    Ocupar con paquete nulo lanza IllegalArgumentException
+[OK]    Ocupar un anaquel ocupado lanza IllegalStateException
+[OK]    setEstado(null) rechazado
+[OK]    setEstado('XYZ') rechazado
+--- Entregas rechazadas no cambian nada ---
+[OK]    Entrega con receptor vacío rechazada
+[OK]    Entrega con fecha nula rechazada
+[OK]    Entrega con fecha anterior al ingreso rechazada
+[OK]    Entrega de paquete inexistente rechazada
+[OK]    Tras los rechazos: paquete sigue EN_ALMACEN, envío ACTIVO y anaquel ocupado
+--- Costo por el gestor (mismo método, dos tipos) ---
+[OK]    Costo de PQ-001 (estándar, 5 días) = 10.0
+--- Entrega válida ---
+[OK]    Entrega: paquete ENTREGADO
+[OK]    Entrega: envío CERRADO
+[OK]    Entrega: anaquel liberado
+[OK]    Entrega: ya no es pendiente
+[OK]    Entrega doble rechazada
+--- P6: nueva operación válida después de un fallo ---
+[OK]    P6 Registro válido después del fallo: queda en A-01 y ACTIVO
+
+Todas las pruebas pasaron.

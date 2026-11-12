@@ -17,7 +17,7 @@ Evolucionar el segundo avance para que distintos tipos de objetos compartan una 
 - Validar antes de modificar; tras un fallo se puede seguir usando el sistema.
 - 7 casos de prueba (P1 a P7) con estado inicial, acción, esperado, obtenido y evidencia.
 - UML actualizado (generalización hacia la clase base; la excepción hereda de `Exception`).
-- Declarar brevemente en qué se usó la IA.
+
 
 ## Decisiones del equipo
 | Tema | Decisión |
@@ -27,13 +27,13 @@ Evolucionar el segundo avance para que distintos tipos de objetos compartan una 
 | Regla estándar | 3 días gratis y 5 pesos por día |
 | Regla frágil | cargo de manejo + 12 pesos por día |
 | Excepción propia | `AlmacenLlenoException extends Exception` (paquete `excepciones`) |
-| Operador | Fuera de este avance |
+
 
 ## Reparto (cada quien edita solo sus archivos)
 | Integrante | Rama | Archivos | Reporte |
 |---|---|---|---|
 | Juan Manuel | `dev/juan-manuel` | `src/app/Main.java`, README, integración y merges | Portada y secciones 1, 2 y 8 |
-| Juan Alejandro | `dev/juan-alejandro` | `src/modelo/` Paquete, PaqueteEstandar, PaqueteFragil | Secciones 3 y 4 |
+| Juan Alejandro | `dev/juan-alejandro` | `src/modelo/` Paquete, PaqueteEstandar, PaqueteFragil, Remitente, Destinatario | Secciones 3 y 4 |
 | Rodrigo | `dev/rodrigo` | `src/modelo/Anaquel.java`, `src/excepciones/`, UML en `docs/` | Secciones 5 y 6 |
 | Roberto | `dev/roberto` | `src/servicio/GestorAlmacen.java`, `tests/`, `docs/evidencias/` | Sección 7 |
 
@@ -60,7 +60,6 @@ Evolucionar el segundo avance para que distintos tipos de objetos compartan una 
 - [ ] Commit de entrega anotado en el README y en el reporte.
 
 ## Pendientes (avances posteriores)
-- Clase `Operador` para registrar al empleado responsable de cada recepción y entrega.
+
 - Asignación automática de anaqueles por dimensiones, peso o categoría, y consolidación de envíos.
-- Persistencia de datos (archivos o base de datos).
-- Enumeraciones para los estados.
+
