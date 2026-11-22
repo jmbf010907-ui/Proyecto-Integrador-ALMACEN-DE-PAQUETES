@@ -1,0 +1,83 @@
+$ java -cp out app.Main < docs/evidencias/entradas/E5_P8_flujo_completo.txt
+Opción: 1
+Código del paquete: PQ-101
+Peso en kg (ej. 2.5): 2
+Nombre del remitente: Papelería Sol
+Teléfono del remitente (10 dígitos): 5533333333
+Nombre del destinatario: Luis Soto
+Teléfono del destinatario (10 dígitos): 5544444444
+Fecha AAAA-MM-DD (Enter = hoy): 2026-11-01
+Registrado con éxito: Envío [PQ-101] ingreso 2026-11-01 | ACTIVO
+Paquete PQ-101 | 2.0 kg | EN_ALMACEN | A-01 | De: Papelería Sol | Para: Luis Soto | Tipo: Estándar
+Intento finalizado.
+
+Opción: 2
+Código del paquete: PQ-102
+Peso en kg (ej. 2.5): 1.5
+Nombre del remitente: Juan Pérez
+Teléfono del remitente (10 dígitos): 5511111111
+Nombre del destinatario: María Ruiz
+Teléfono del destinatario (10 dígitos): 5522222222
+Cargo de manejo en pesos (ej. 20): 20
+Fecha AAAA-MM-DD (Enter = hoy): 2026-11-03
+Registrado con éxito: Envío [PQ-102] ingreso 2026-11-03 | ACTIVO
+Paquete PQ-102 | 1.5 kg | EN_ALMACEN | A-02 | De: Juan Pérez | Para: María Ruiz | Tipo: Frágil (manejo $20.0)
+Intento finalizado.
+
+Opción: 6
+Mínimo de días guardado (ej. 3): 3
+Fecha AAAA-MM-DD (Enter = hoy): 2026-11-05
+Envío [PQ-101] ingreso 2026-11-01 | ACTIVO | A-01 | Avisar al remitente: Papelería Sol (5533333333)
+
+Opción: 5
+Código del paquete: PQ-101
+Fecha AAAA-MM-DD (Enter = hoy): 2026-11-05
+Ingreso: 2026-11-01 | Consulta: 2026-11-05 | Días guardados: 4
+Tipo de objeto: PaqueteEstandar
+Costo de almacenaje: $5.00
+(Solo es una cotización: el envío y el anaquel no cambian.)
+
+Opción: 5
+Código del paquete: PQ-102
+Fecha AAAA-MM-DD (Enter = hoy): 2026-11-05
+Ingreso: 2026-11-03 | Consulta: 2026-11-05 | Días guardados: 2
+Tipo de objeto: PaqueteFragil
+Costo de almacenaje: $44.00
+(Solo es una cotización: el envío y el anaquel no cambian.)
+
+Opción: 4
+Código del paquete: PQ-101
+Nombre de quien recibe: Luis Soto
+Fecha AAAA-MM-DD (Enter = hoy): 2026-11-05
+Entrega registrada con éxito. Paquete PQ-101 | 2.0 kg | ENTREGADO | sin anaquel | De: Papelería Sol | Para: Luis Soto | Tipo: Estándar
+Intento finalizado.
+
+Opción: 6
+Mínimo de días guardado (ej. 3): 3
+Fecha AAAA-MM-DD (Enter = hoy): 2026-11-05
+No hay paquetes pendientes con ese criterio.
+
+Opción: 1
+Código del paquete: PQ-103
+Peso en kg (ej. 2.5): 3
+Nombre del remitente: Papelería Sol
+Teléfono del remitente (10 dígitos): 5533333333
+Nombre del destinatario: Rosa Díaz
+Teléfono del destinatario (10 dígitos): 5566666666
+Fecha AAAA-MM-DD (Enter = hoy): 2026-11-05
+Registrado con éxito: Envío [PQ-103] ingreso 2026-11-05 | ACTIVO
+Paquete PQ-103 | 3.0 kg | EN_ALMACEN | A-01 | De: Papelería Sol | Para: Rosa Díaz | Tipo: Estándar
+Intento finalizado.
+
+Opción: 7
+Historial:
+Envío [PQ-101] ingreso 2026-11-01 | CERRADO | Entrega el 2026-11-05 a Luis Soto
+Envío [PQ-102] ingreso 2026-11-03 | ACTIVO
+Envío [PQ-103] ingreso 2026-11-05 | ACTIVO
+Anaqueles:
+A-01 [ocupado por PQ-103]
+A-02 [ocupado por PQ-102]
+A-03 [libre]
+
+Opción: 0
+Hasta luego.

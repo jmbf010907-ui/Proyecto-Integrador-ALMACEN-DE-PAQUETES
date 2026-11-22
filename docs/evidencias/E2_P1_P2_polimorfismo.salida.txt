@@ -1,0 +1,49 @@
+$ java -cp out app.Main < docs/evidencias/entradas/E2_P1_P2_polimorfismo.txt
+Opción: 8
+Costo de almacenaje a 5 días, llamando con referencias de tipo Paquete:
+Referencia: Paquete | Objeto: PaqueteEstandar | Costo: $10.00
+Referencia: Paquete | Objeto: PaqueteFragil | Costo: $80.00
+
+Opción: 1
+Código del paquete: PQ-001
+Peso en kg (ej. 2.5): 2.5
+Nombre del remitente: Tienda La Esquina
+Teléfono del remitente (10 dígitos): 5512345678
+Nombre del destinatario: Ana López
+Teléfono del destinatario (10 dígitos): 5587654321
+Fecha AAAA-MM-DD (Enter = hoy): 2026-10-10
+Registrado con éxito: Envío [PQ-001] ingreso 2026-10-10 | ACTIVO
+Paquete PQ-001 | 2.5 kg | EN_ALMACEN | A-01 | De: Tienda La Esquina | Para: Ana López | Tipo: Estándar
+Intento finalizado.
+
+Opción: 2
+Código del paquete: PQ-002
+Peso en kg (ej. 2.5): 1.2
+Nombre del remitente: Juan Pérez
+Teléfono del remitente (10 dígitos): 5511111111
+Nombre del destinatario: María Ruiz
+Teléfono del destinatario (10 dígitos): 5522222222
+Cargo de manejo en pesos (ej. 20): 20
+Fecha AAAA-MM-DD (Enter = hoy): 2026-10-12
+Registrado con éxito: Envío [PQ-002] ingreso 2026-10-12 | ACTIVO
+Paquete PQ-002 | 1.2 kg | EN_ALMACEN | A-02 | De: Juan Pérez | Para: María Ruiz | Tipo: Frágil (manejo $20.0)
+Intento finalizado.
+
+Opción: 5
+Código del paquete: PQ-001
+Fecha AAAA-MM-DD (Enter = hoy): 2026-10-15
+Ingreso: 2026-10-10 | Consulta: 2026-10-15 | Días guardados: 5
+Tipo de objeto: PaqueteEstandar
+Costo de almacenaje: $10.00
+(Solo es una cotización: el envío y el anaquel no cambian.)
+
+Opción: 5
+Código del paquete: PQ-002
+Fecha AAAA-MM-DD (Enter = hoy): 2026-10-15
+Ingreso: 2026-10-12 | Consulta: 2026-10-15 | Días guardados: 3
+Tipo de objeto: PaqueteFragil
+Costo de almacenaje: $56.00
+(Solo es una cotización: el envío y el anaquel no cambian.)
+
+Opción: 0
+Hasta luego.

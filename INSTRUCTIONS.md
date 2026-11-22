@@ -1,65 +1,45 @@
-# Instrucciones del equipo — Tercer avance
+# Instrucciones del equipo: cuarto avance (entrega final)
 
 ## Objetivo
-Evolucionar el segundo avance para que distintos tipos de objetos compartan una estructura y respondan de forma diferente a una misma operación (**herencia y polimorfismo**), y que el sistema valide los datos, atienda situaciones excepcionales y conserve un estado coherente cuando una operación falle (**excepciones**).
+Cerrar el proyecto: atender la retroalimentación del tercer avance, dejar las cuatro funcionalidades integradas y estables, documentar P1 a P8 y preparar la exposición (máximo 5 minutos) y la demostración en vivo.
 
-- Entrega: en Classroom, en la fecha indicada por el profesor (reporte PDF + enlace del repositorio o carpeta comprimida).
-- Los tres entregables (PDF, código y README) deben corresponder a **la misma versión**; el commit de entrega se anota en el README y en el reporte.
-
-## Requisitos
-- ≥ 4 clases funcionales (sin contar Main ni la excepción propia) y ≥ 3 paquetes.
-- ≥ 4 funcionalidades: las 2 del segundo avance (corregidas) y ≥ 2 adicionales.
-- Menú de consola con operaciones sucesivas y opción de salir (datos en memoria).
-- Una clase base y ≥ 2 subclases con relación «es un» justificada; `this` y `super(...)`.
-- Método sobrescrito con `@Override` en ambas subclases y llamado mediante el tipo base.
-- Entrada con formato incorrecto (`NumberFormatException`), `IllegalArgumentException` y una **excepción propia verificada** (`extends Exception`) con `throw`, `throws` y captura en `Main`.
-- ≥ 1 bloque `try-catch-finally`.
-- Validar antes de modificar; tras un fallo se puede seguir usando el sistema.
-- 7 casos de prueba (P1 a P7) con estado inicial, acción, esperado, obtenido y evidencia.
-- UML actualizado (generalización hacia la clase base; la excepción hereda de `Exception`).
-
-
-## Decisiones del equipo
-| Tema | Decisión |
+## Retroalimentación atendida
+| Observación | Dónde quedó |
 |---|---|
-| Jerarquía | `Paquete` (base) → `PaqueteEstandar` / `PaqueteFragil` |
-| Método polimórfico | `calcularCostoAlmacenaje(int dias)` |
-| Regla estándar | 3 días gratis y 5 pesos por día |
-| Regla frágil | cargo de manejo + 12 pesos por día |
-| Excepción propia | `AlmacenLlenoException extends Exception` (paquete `excepciones`) |
+| Prueba en el límite de días gratis (3 días = $0, 4 días = $5) mostrando ambas fechas y que cotizar no cambia nada | `PruebasAlmacen` (bloque «frontera»), opción 5 del menú y `docs/evidencias/E3_frontera_dias_gratis.salida.txt` |
+| Fecha nula no debe ocupar el anaquel; después debe poder registrarse otro en el mismo anaquel | `GestorAlmacen.registrarPaquete` y bloque «Prueba sugerida» de `PruebasAlmacen` |
+| Proteger los cambios de estado del paquete | `Paquete` sin `setEstado`/`setAnaquel` públicos; `Anaquel.ocupar/liberar` y `Envio.cerrar` son los únicos que cambian estado y ubicación |
+| Justificar `Remitente` | Es a quien se avisa de paquetes pendientes (opción 6); explicado en `Remitente.java`, README y reporte |
 
-
-## Reparto (cada quien edita solo sus archivos)
-| Integrante | Rama | Archivos | Reporte |
+## Reparto
+| Integrante | Rama | Archivos | Exposición |
 |---|---|---|---|
-| Juan Manuel | `dev/juan-manuel` | `src/app/Main.java`, README, integración y merges | Portada y secciones 1, 2 y 8 |
-| Juan Alejandro | `dev/juan-alejandro` | `src/modelo/` Paquete, PaqueteEstandar, PaqueteFragil, Remitente, Destinatario | Secciones 3 y 4 |
-| Rodrigo | `dev/rodrigo` | `src/modelo/Anaquel.java`, `src/excepciones/`, UML en `docs/` | Secciones 5 y 6 |
-| Roberto | `dev/roberto` | `src/servicio/GestorAlmacen.java`, `tests/`, `docs/evidencias/` | Sección 7 |
+| Juan Manuel | `dev/juan-manuel` | `Main`, `Remitente`, `Destinatario`, README, integración y merges | Diapositivas 1 y 5 (problema y cierre) |
+| Juan Alejandro | `dev/juan-alejandro` | `Paquete`, `PaqueteEstandar`, `PaqueteFragil` | Diapositiva 3 (herencia y polimorfismo) |
+| Rodrigo | `dev/rodrigo` | `Anaquel`, `Envio`, `excepciones/`, UML | Diapositiva 2 (diseño y UML) |
+| Roberto | `dev/roberto` | `GestorAlmacen`, `tests/`, `docs/evidencias/` | Diapositiva 4 (excepciones y pruebas) |
 
-## Reglas
-1. No se sube directo a `main`: cada quien trabaja en su rama y abre Pull Request.
-2. Otro compañero revisa antes del merge.
-3. Antes del PR, el código compila y las pruebas pasan (lo verifica la Action de GitHub: ✓ verde).
-4. Commits pequeños con mensaje claro.
-5. Todos deben poder **explicar su parte** (la revisión puede incluir preguntas individuales).
+## Antes de entregar
+1. Integrar `dev/juan-manuel` en `main` con Pull Request (la Action debe quedar en verde).
+2. En `main`: compilar desde cero con el README y correr `java -cp out PruebasAlmacen`.
+3. Crear la etiqueta `entrega-final` sobre ese commit y subirla (`git tag entrega-final` y `git push origin entrega-final`).
+4. Subir a Classroom: reporte PDF, presentación y enlace del repositorio con la etiqueta.
 
-## Orden de trabajo
-1. Cada integrante sube su parte a su rama y la compila.
-2. Juan Manuel integra las ramas en `main`, compila todo y corre `PruebasAlmacen`.
-3. Cada quien toma las capturas de los casos que le tocan (legibles, con el número de caso).
-4. Se arma el PDF, se anota el commit de entrega y se revisa la lista de verificación.
+## Guion de la demostración en vivo (después de los 5 minutos)
+1. Compilar y abrir el menú siguiendo el README.
+2. Opción 1 con `abc` como peso (P3), luego con `-1` (P4) y luego un registro válido (P6 y P7).
+3. Opción 2: registrar un frágil. Opción 8 u opción 5 para ambos tipos (P1 y P2).
+4. Llenar los 3 anaqueles y registrar un cuarto: `AlmacenLlenoException`; opción 7 antes y después (P5).
+5. Opción 6 (pendientes con remitente), opción 4 (entrega) y un nuevo registro en el anaquel liberado (P8).
+6. Abrir el código: constructores con `super(...)`, `@Override` en las subclases, `registrarPaquete` (validar antes de modificar), `Anaquel.ocupar` y `Envio.cerrar`, `AlmacenLlenoException` y el `try-catch-finally` de `Main.registrar`.
 
-## Lista de verificación final
-- [ ] El proyecto compila y se ejecuta siguiendo el README.
-- [ ] Hay ≥ 4 clases del dominio o servicio y 3 paquetes.
-- [ ] Hay clase base, dos subclases y polimorfismo observable.
-- [ ] La excepción propia se lanza, se declara y se captura en una operación real.
-- [ ] Los fallos controlados conservan el estado y permiten seguir usando el sistema.
-- [ ] El UML, el código, el reporte y las evidencias corresponden a la misma versión.
-- [ ] Commit de entrega anotado en el README y en el reporte.
-
-## Pendientes (avances posteriores)
-
-- Asignación automática de anaqueles por dimensiones, peso o categoría, y consolidación de envíos.
-
+## Lista de verificación
+- [ ] Compila y ejecuta desde cero siguiendo el README.
+- [ ] Cuatro funcionalidades reales con menú y opción de salir.
+- [ ] Al menos 4 clases funcionales además de `Main` y 3 paquetes.
+- [ ] Clase base, dos subclases y polimorfismo comprobable.
+- [ ] Validaciones, excepción propia y `try-catch-finally`.
+- [ ] Un fallo controlado no corrompe el estado y permite continuar.
+- [ ] UML, reporte PDF y evidencias de P1 a P8.
+- [ ] Exposición de 5 minutos como máximo; la demostración va después.
+- [ ] Todos pueden explicar su parte y una decisión del código.

@@ -4,6 +4,14 @@
 [OK]    P2 Frágil a 5 días: 20 + 5*12 = 80.0
 [OK]    P2 Mismo método, resultado distinto por tipo de objeto
 [OK]    Días negativos rechazados
+--- P1 frontera de días gratis (estándar): 3 días = $0, 4 días = $5 ---
+        Ingreso 2026-11-10 | consultas 2026-11-13 y 2026-11-14
+[OK]    Frontera: consulta 2026-11-13 = 3 días
+[OK]    Frontera: a 3 días el estándar cuesta $0.00
+[OK]    Frontera: consulta 2026-11-14 = 4 días
+[OK]    Frontera: a 4 días el estándar cuesta $5.00
+[OK]    Cotizar no modifica el envío (sigue ACTIVO, sin salida ni entrega)
+[OK]    Cotizar no modifica el anaquel (A-01 sigue con B-1) ni el paquete (EN_ALMACEN)
 --- P3: formato incorrecto ---
 [OK]    P3 Texto 'abc' en un peso lanza NumberFormatException
 --- P4: valores fuera de las reglas ---
@@ -26,35 +34,56 @@
 [OK]    P5 Segundo registro lanza AlmacenLlenoException
 [OK]    P5 Estado después: sigue 1 envío
 [OK]    P5 Estado después: A-01 sigue con PQ-001
-[OK]    P5 El paquete rechazado no quedó registrado
+[OK]    P5 El paquete rechazado no quedó registrado ni ubicado
+--- Prueba sugerida (2.º avance): fecha nula y luego registro válido en el mismo anaquel ---
+[OK]    Fecha nula rechazada con IllegalArgumentException
+[OK]    Tras la fecha nula: A-01 libre e historial vacío
+[OK]    Registro válido en el mismo anaquel funciona
 --- Rechazos que no deben dejar anaqueles ocupados ---
-[OK]    Fecha nula rechazada
-[OK]    Fecha nula: ningún anaquel ocupado y ningún envío
 [OK]    Paquete nulo rechazado
 [OK]    Paquete nulo: ningún anaquel ocupado
 [OK]    Código duplicado rechazado
 [OK]    Duplicado: solo un anaquel ocupado
---- Protección del estado del anaquel y del paquete ---
+--- Protección del estado del paquete y del anaquel ---
+[OK]    Paquete no tiene setEstado ni setAnaquel públicos
 [OK]    Liberar un anaquel libre lanza IllegalStateException
 [OK]    Ocupar con paquete nulo lanza IllegalArgumentException
+[OK]    Ocupar enlaza en ambos sentidos (anaquel → paquete y paquete → anaquel)
 [OK]    Ocupar un anaquel ocupado lanza IllegalStateException
-[OK]    setEstado(null) rechazado
-[OK]    setEstado('XYZ') rechazado
+[OK]    Un paquete ya ubicado no se puede poner en otro anaquel
+[OK]    Tras el rechazo: Z-02 libre y el paquete sigue en Z-01
+[OK]    Liberar desenlaza en ambos sentidos
+[OK]    Cerrar un envío cuyo paquete no está en un anaquel se rechaza
+[OK]    Tras el rechazo: envío ACTIVO y paquete EN_ALMACEN
 --- Entregas rechazadas no cambian nada ---
 [OK]    Entrega con receptor vacío rechazada
 [OK]    Entrega con fecha nula rechazada
 [OK]    Entrega con fecha anterior al ingreso rechazada
 [OK]    Entrega de paquete inexistente rechazada
 [OK]    Tras los rechazos: paquete sigue EN_ALMACEN, envío ACTIVO y anaquel ocupado
---- Costo por el gestor (mismo método, dos tipos) ---
+--- Costo por el gestor ---
 [OK]    Costo de PQ-001 (estándar, 5 días) = 10.0
 --- Entrega válida ---
 [OK]    Entrega: paquete ENTREGADO
 [OK]    Entrega: envío CERRADO
-[OK]    Entrega: anaquel liberado
+[OK]    Entrega: anaquel liberado y paquete sin anaquel
 [OK]    Entrega: ya no es pendiente
 [OK]    Entrega doble rechazada
+[OK]    Un paquete entregado no puede volver a ocupar un anaquel
 --- P6: nueva operación válida después de un fallo ---
 [OK]    P6 Registro válido después del fallo: queda en A-01 y ACTIVO
+--- P7: finally en un intento fallido y en uno válido (menú real) ---
+[OK]    P7 «Intento finalizado.» aparece 2 veces
+[OK]    P7 «Registrado con éxito» aparece 1 vez
+[OK]    P7 El intento fallido muestra el mensaje de formato
+--- P8: flujo completo con las cuatro funcionalidades (menú real) ---
+[OK]    P8 Registro estándar en A-01 y frágil en A-02
+[OK]    P8 Pendientes muestra PQ-101 y al remitente a quien avisar
+[OK]    P8 Costo estándar a 4 días = $5.00 y frágil a 2 días = $44.00
+[OK]    P8 La entrega cierra el envío y libera el anaquel
+[OK]    P8 Después de la entrega no hay pendientes
+[OK]    P8 El nuevo paquete reutiliza el anaquel liberado (A-01)
+[OK]    P8 Historial final coherente
+[OK]    P8 El programa termina con la opción 0
 
-Todas las pruebas pasaron.
+Todas las pruebas pasaron (71 verificaciones).
