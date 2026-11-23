@@ -1,36 +1,30 @@
-# Rúbrica — Tercer avance
+# Rúbrica: cuarto avance (entrega final)
 
-| Criterio | Valor | Evidencia para obtener el puntaje completo |
+| Criterio | Valor | Evidencia de cumplimiento |
 |---|---|---|
-| Evolución funcional | 15 % | Al menos cuatro funcionalidades útiles, continuidad con el segundo avance y correcciones documentadas. |
-| Herencia y constructores | 15 % | Clase base y dos subclases pertinentes; relación justificada; uso correcto de `this` y `super(...)`. |
-| Polimorfismo | 20 % | Método sobrescrito en ambas subclases, llamadas mediante el tipo base y diferencias útiles verificadas en ejecución. |
-| Validaciones y excepciones | 20 % | Formato, argumentos y excepción propia atendidos; `throw`, `throws` y `finally` correctos; estado consistente y recuperación. |
-| Encapsulamiento, UML y paquetes | 10 % | Atributos protegidos mediante acceso controlado, responsabilidades claras y UML coherente con el código. |
-| Pruebas y evidencias | 10 % | Siete casos mínimos reproducibles, resultados esperados y obtenidos, y evidencias de las cuatro funcionalidades. |
-| Documentación y comprensión | 10 % | Reporte y README completos; participación identificada y explicación clara de las decisiones y del código. |
+| Versión final y funcionalidades | 25 % | Cuatro funcionalidades completas, flujo estable, mejoras y correcciones respecto al avance 3. |
+| Diseño y aplicación de POO | 25 % | Encapsulamiento, clases, paquetes, herencia, constructores, `@Override`, polimorfismo y excepciones utilizados correctamente. |
+| Pruebas y manejo de fallos | 15 % | P1–P8 verificables, resultados consistentes y recuperación ante errores. |
+| Código y documentación | 10 % | Compila, README útil, UML congruente, reporte completo y evidencia de participación. |
+| Exposición (máximo 5 min) | 10 % | Claridad, dominio del proyecto, administración del tiempo y participación del equipo. |
+| Demostración en vivo | 15 % | Ejecución real, cuatro funciones, polimorfismo, excepción, recuperación y explicación del código. |
 | **Total** | **100 %** | |
 
-## Escala por criterio
-- Completo y correcto: 100 % de su valor.
-- Adecuado con detalles menores: 80 %.
-- Parcial: 60 %.
-- Insuficiente: 0 a 40 %, según la evidencia.
+Escala por criterio: completo 100 %; adecuado con detalles menores 80 %; parcial 60 %; insuficiente 0–40 %.
 
-El mismo fallo no se descuenta dos veces por el mismo motivo.
-
-## Casos mínimos de prueba
-| Caso | Situación | Qué debe comprobarse |
+## Pruebas mínimas de cierre
+| Caso | Situación | Resultado que debe comprobarse |
 |---|---|---|
-| P1 | Operación válida con un objeto de la primera subclase | Se llama al método mediante el tipo base y se observa el comportamiento de esa subclase. |
-| P2 | Misma llamada con un objeto de la segunda subclase | Se ejecuta su implementación y se observa la diferencia prevista. |
-| P3 | Texto en una entrada numérica | Se captura la excepción de formato y se informa cómo corregir el dato. |
-| P4 | Valor fuera de las reglas (cero, negativo, vacío) | Se lanza y captura `IllegalArgumentException` sin aceptar datos inválidos. |
-| P5 | Situación que activa la excepción propia | Se informa el motivo y se conserva el estado previo (anotar estado antes y después). |
-| P6 | Nueva operación válida después de un fallo | El sistema continúa y ejecuta la nueva solicitud correctamente. |
-| P7 | Un intento válido y uno fallido con `finally` | La acción de `finally` aparece en ambos; la confirmación de éxito solo en el válido. |
+| P1–P2 | Polimorfismo con las dos subclases | Misma llamada mediante tipo base; comportamientos distintos. |
+| P3 | Entrada de formato incorrecto | Error controlado y mensaje entendible. |
+| P4 | Dato que viola una regla | `IllegalArgumentException` y rechazo correcto. |
+| P5 | Excepción propia | Estado anterior y posterior sin cambios indebidos. |
+| P6 | Acción válida después del error | El programa continúa operando. |
+| P7 | `finally` en éxito y fallo | La acción final ocurre en ambos intentos. |
+| P8 | Flujo completo con varias acciones | Las cuatro funcionalidades se conectan correctamente. |
 
 ## Entregables
-- Reporte en PDF (portada, cambios y observaciones atendidas, funcionalidades, jerarquía, polimorfismo, UML y paquetes, validaciones y excepciones, tabla de pruebas con evidencias, participación y pendientes).
-- Proyecto Java completo (código fuente en paquetes, `Main`, clases base y derivadas, excepción propia).
-- `README.md` (versión de Java, estructura, cómo compilar y ejecutar, funcionalidades, pasos para reproducir las pruebas y limitaciones).
+1. Reporte final en PDF (5 a 9 páginas de contenido + anexos): `docs/Reporte_Final_Almacen_de_Paquetes.pdf`.
+2. Código Java completo (este repositorio, etiqueta `entrega-final`).
+3. `README.md` actualizado.
+4. Presentación de 4 a 6 diapositivas (se sube aparte a Classroom; no está en el repositorio).

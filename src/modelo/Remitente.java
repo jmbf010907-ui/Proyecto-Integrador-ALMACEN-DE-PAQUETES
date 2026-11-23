@@ -1,6 +1,14 @@
 package modelo;
 
-/** Persona o negocio que trae el paquete al almacén. */
+/**
+ * Persona o negocio que deja el paquete en el almacén.
+ *
+ * Por qué se conserva (observación del primer y segundo avance): el destinatario es quien
+ * recoge, pero el remitente es quien dejó el paquete y a quien el almacén debe avisar cuando
+ * un paquete lleva varios días sin ser recogido. La consulta de pendientes (opción 6 del menú,
+ * GestorAlmacen.getPendientes) muestra el nombre y teléfono del remitente para contactarlo.
+ * Sin esta clase el almacén no tendría a quién reportar un paquete rezagado.
+ */
 public class Remitente {
     private String nombre;
     private String telefono;
@@ -17,7 +25,7 @@ public class Remitente {
         if (nombre == null || nombre.isBlank()) {
             throw new IllegalArgumentException("El nombre del remitente no puede estar vacío.");
         }
-        this.nombre = nombre;
+        this.nombre = nombre.trim();
     }
 
     public void setTelefono(String telefono) {

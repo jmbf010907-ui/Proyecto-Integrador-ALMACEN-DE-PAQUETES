@@ -10,3 +10,6 @@ out/
 # Sistema
 .DS_Store
 Thumbs.db
+
+# Presentación (se entrega aparte, no va en el repositorio)
+docs/Presentacion_*

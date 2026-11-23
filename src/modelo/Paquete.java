@@ -1,6 +1,13 @@
 package modelo;
 
-/** Clase base: paquete guardado en el almacén. Las subclases cambian el costo de almacenaje. */
+/**
+ * Clase base: paquete guardado en el almacén. Las subclases cambian el costo de almacenaje.
+ *
+ * El estado y el anaquel NO tienen setters públicos: solo los cambian Anaquel (al ocupar o
+ * liberar) y Envio (al cerrar con una entrega), que están en este mismo paquete y validan
+ * antes de modificar. Así nadie puede asignar un texto de estado inventado ni una
+ * ubicación que no coincida con el anaquel real.
+ */
 public class Paquete {
     public static final String EN_ALMACEN = "EN_ALMACEN";
     public static final String ENTREGADO = "ENTREGADO";
@@ -37,14 +44,21 @@ public class Paquete {
     public Destinatario getDestinatario() { return destinatario; }
     public Anaquel getAnaquel() { return anaquel; }
 
-    public void setAnaquel(Anaquel anaquel) { this.anaquel = anaquel; }
+    public boolean estaEnAlmacen() {
+        return EN_ALMACEN.equals(estado);
+    }
 
-    /** Solo acepta los estados definidos arriba. */
-    public void setEstado(String estado) {
-        if (!EN_ALMACEN.equals(estado) && !ENTREGADO.equals(estado)) {
-            throw new IllegalArgumentException("Estado inválido: " + estado);
+    /** Solo lo llama Anaquel.ocupar / Anaquel.liberar (visibilidad de paquete). */
+    void asignarAnaquel(Anaquel anaquel) {
+        this.anaquel = anaquel;
+    }
+
+    /** Solo lo llama Envio.cerrar después de validar la entrega (visibilidad de paquete). */
+    void marcarEntregado() {
+        if (!estaEnAlmacen()) {
+            throw new IllegalStateException("El paquete " + codigo + " ya fue entregado.");
         }
-        this.estado = estado;
+        this.estado = ENTREGADO;
     }
 
     /** Método que las subclases sobrescriben: costo de guardar el paquete varios días. */

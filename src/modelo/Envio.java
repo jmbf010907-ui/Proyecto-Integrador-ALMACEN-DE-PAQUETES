@@ -35,7 +35,11 @@ public class Envio {
         return ACTIVO.equals(estado);
     }
 
-    /** No se cierra dos veces ni con fecha anterior al ingreso. */
+    /**
+     * Cierra el envío con su entrega. Primero valida todo (no cerrado, entrega válida,
+     * fecha posterior al ingreso, paquete ubicado en un anaquel) y solo entonces cambia:
+     * el envío pasa a CERRADO, el paquete a ENTREGADO y el anaquel queda libre.
+     */
     public void cerrar(Entrega entrega) {
         if (!estaActivo()) {
             throw new IllegalStateException("El envío del paquete " + paquete.getCodigo() + " ya está cerrado.");
@@ -46,9 +50,16 @@ public class Envio {
         if (entrega.getFecha().isBefore(fechaIngreso)) {
             throw new IllegalArgumentException("La entrega no puede ser anterior a la fecha de ingreso.");
         }
+        Anaquel anaquel = paquete.getAnaquel();
+        if (anaquel == null || !paquete.estaEnAlmacen()) {
+            throw new IllegalStateException("El paquete " + paquete.getCodigo() + " no está guardado en un anaquel.");
+        }
+        // A partir de aquí ya no hay validaciones que puedan fallar: se cambian los tres objetos.
         this.entrega = entrega;
         this.fechaSalida = entrega.getFecha();
         this.estado = CERRADO;
+        paquete.marcarEntregado();
+        anaquel.liberar();
     }
 
     @Override

@@ -51,8 +51,8 @@ public class Main {
         System.out.println("2. Registrar paquete frágil");
         System.out.println("3. Buscar paquete por código");
         System.out.println("4. Registrar entrega");
-        System.out.println("5. Calcular costo de almacenaje");
-        System.out.println("6. Ver paquetes pendientes");
+        System.out.println("5. Cotizar costo de almacenaje");
+        System.out.println("6. Ver pendientes (avisar al remitente)");
         System.out.println("7. Ver historial y anaqueles");
         System.out.println("8. Demostración de polimorfismo");
         System.out.println("0. Salir");
@@ -94,7 +94,7 @@ public class Main {
         }
     }
 
-    // Funcionalidad 3: buscar paquete
+    // Complementaria: buscar paquete
     private static void buscar(Scanner sc, GestorAlmacen almacen) {
         String codigo = leer(sc, "Código a buscar: ");
         Paquete p = almacen.buscarPaquete(codigo);
@@ -119,15 +119,19 @@ public class Main {
         }
     }
 
-    // Funcionalidad 4: costo de almacenaje (polimorfismo)
+    // Funcionalidad 3: cotizar costo de almacenaje (polimorfismo)
     private static void costo(Scanner sc, GestorAlmacen almacen) {
         try {
             String codigo = leer(sc, "Código del paquete: ");
             LocalDate fecha = leerFecha(sc);
-            Paquete p = almacen.buscarPaquete(codigo);
-            double total = almacen.calcularCostoAlmacenaje(codigo, fecha);
+            double total = almacen.calcularCostoAlmacenaje(codigo, fecha); // valida que exista
+            Envio envio = almacen.buscarEnvio(codigo);
+            Paquete p = envio.getPaquete();                 // referencia del tipo base
+            System.out.println("Ingreso: " + envio.getFechaIngreso() + " | Consulta: " + fecha
+                    + " | Días guardados: " + almacen.calcularDiasAlmacenado(codigo, fecha));
             System.out.println("Tipo de objeto: " + p.getClass().getSimpleName());
             System.out.printf("Costo de almacenaje: $%.2f%n", total);
+            System.out.println("(Solo es una cotización: el envío y el anaquel no cambian.)");
         } catch (DateTimeParseException ex) {
             System.out.println("Fecha incorrecta: usa el formato AAAA-MM-DD, por ejemplo 2026-11-15.");
         } catch (IllegalArgumentException ex) {
@@ -135,7 +139,7 @@ public class Main {
         }
     }
 
-    // Funcionalidad 5: paquetes pendientes
+    // Funcionalidad 4: paquetes pendientes y remitente a quien avisar
     private static void pendientes(Scanner sc, GestorAlmacen almacen) {
         try {
             int dias = Integer.parseInt(leer(sc, "Mínimo de días guardado (ej. 3): "));
@@ -144,7 +148,11 @@ public class Main {
             if (lista.isEmpty()) {
                 System.out.println("No hay paquetes pendientes con ese criterio.");
             }
-            lista.forEach(System.out::println);
+            for (Envio e : lista) {
+                Paquete p = e.getPaquete();
+                System.out.println(e + " | " + p.getAnaquel().getCodigo()
+                        + " | Avisar al remitente: " + p.getRemitente());
+            }
         } catch (NumberFormatException ex) {
             System.out.println("Formato incorrecto: escribe un número entero, por ejemplo 3.");
         } catch (DateTimeParseException ex) {
@@ -154,7 +162,7 @@ public class Main {
         }
     }
 
-    // Funcionalidad 6: historial y estado de anaqueles
+    // Complementaria: historial y estado de anaqueles
     private static void verHistorialYAnaqueles(GestorAlmacen almacen) {
         System.out.println("Historial:");
         List<Envio> historial = almacen.getHistorial();

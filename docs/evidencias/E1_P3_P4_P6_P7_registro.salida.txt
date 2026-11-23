@@ -1,0 +1,31 @@
+$ java -cp out app.Main < docs/evidencias/entradas/E1_P3_P4_P6_P7_registro.txt
+Opción: 1
+Código del paquete: PQ-001
+Peso en kg (ej. 2.5): abc
+Formato incorrecto: escribe un número, por ejemplo 2.5 (sin letras).
+Intento finalizado.
+
+Opción: 1
+Código del paquete: PQ-001
+Peso en kg (ej. 2.5): -1
+Nombre del remitente: Tienda La Esquina
+Teléfono del remitente (10 dígitos): 5512345678
+Nombre del destinatario: Ana López
+Teléfono del destinatario (10 dígitos): 5587654321
+Dato inválido: El peso debe ser mayor a 0.
+Intento finalizado.
+
+Opción: 1
+Código del paquete: PQ-001
+Peso en kg (ej. 2.5): 2.5
+Nombre del remitente: Tienda La Esquina
+Teléfono del remitente (10 dígitos): 5512345678
+Nombre del destinatario: Ana López
+Teléfono del destinatario (10 dígitos): 5587654321
+Fecha AAAA-MM-DD (Enter = hoy): 2026-10-10
+Registrado con éxito: Envío [PQ-001] ingreso 2026-10-10 | ACTIVO
+Paquete PQ-001 | 2.5 kg | EN_ALMACEN | A-01 | De: Tienda La Esquina | Para: Ana López | Tipo: Estándar
+Intento finalizado.
+
+Opción: 0
+Hasta luego.

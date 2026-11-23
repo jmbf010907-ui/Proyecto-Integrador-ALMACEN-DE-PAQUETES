@@ -17,7 +17,7 @@ public class Destinatario {
         if (nombre == null || nombre.isBlank()) {
             throw new IllegalArgumentException("El nombre del destinatario no puede estar vacío.");
         }
-        this.nombre = nombre;
+        this.nombre = nombre.trim();
     }
 
     public void setTelefono(String telefono) {

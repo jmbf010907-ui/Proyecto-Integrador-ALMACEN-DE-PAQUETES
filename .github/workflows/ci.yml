@@ -11,9 +11,9 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
-      - name: Compilar
-        run: javac -d out $(find src tests -name "*.java")
-      - name: Pruebas
+      - name: Compilar desde cero
+        run: javac -encoding UTF-8 -d out $(find src tests -name "*.java")
+      - name: Pruebas (P1 a P8)
         run: java -cp out PruebasAlmacen
-      - name: Demo (Main)
-        run: java -cp out app.Main
+      - name: Demo del menú (flujo completo P8)
+        run: java -cp out app.Main < docs/evidencias/entradas/E5_P8_flujo_completo.txt

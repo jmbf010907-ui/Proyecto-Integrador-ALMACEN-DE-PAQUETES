@@ -1,0 +1,19 @@
+1
+PQ-001
+abc
+1
+PQ-001
+-1
+Tienda La Esquina
+5512345678
+Ana López
+5587654321
+1
+PQ-001
+2.5
+Tienda La Esquina
+5512345678
+Ana López
+5587654321
+2026-10-10
+0

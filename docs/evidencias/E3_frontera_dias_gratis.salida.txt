@@ -1,0 +1,43 @@
+$ java -cp out app.Main < docs/evidencias/entradas/E3_frontera_dias_gratis.txt
+Opción: 1
+Código del paquete: PQ-201
+Peso en kg (ej. 2.5): 1
+Nombre del remitente: Tienda La Esquina
+Teléfono del remitente (10 dígitos): 5512345678
+Nombre del destinatario: Ana López
+Teléfono del destinatario (10 dígitos): 5587654321
+Fecha AAAA-MM-DD (Enter = hoy): 2026-11-10
+Registrado con éxito: Envío [PQ-201] ingreso 2026-11-10 | ACTIVO
+Paquete PQ-201 | 1.0 kg | EN_ALMACEN | A-01 | De: Tienda La Esquina | Para: Ana López | Tipo: Estándar
+Intento finalizado.
+
+Opción: 5
+Código del paquete: PQ-201
+Fecha AAAA-MM-DD (Enter = hoy): 2026-11-13
+Ingreso: 2026-11-10 | Consulta: 2026-11-13 | Días guardados: 3
+Tipo de objeto: PaqueteEstandar
+Costo de almacenaje: $0.00
+(Solo es una cotización: el envío y el anaquel no cambian.)
+
+Opción: 5
+Código del paquete: PQ-201
+Fecha AAAA-MM-DD (Enter = hoy): 2026-11-14
+Ingreso: 2026-11-10 | Consulta: 2026-11-14 | Días guardados: 4
+Tipo de objeto: PaqueteEstandar
+Costo de almacenaje: $5.00
+(Solo es una cotización: el envío y el anaquel no cambian.)
+
+Opción: 3
+Código a buscar: PQ-201
+Paquete PQ-201 | 1.0 kg | EN_ALMACEN | A-01 | De: Tienda La Esquina | Para: Ana López | Tipo: Estándar
+
+Opción: 7
+Historial:
+Envío [PQ-201] ingreso 2026-11-10 | ACTIVO
+Anaqueles:
+A-01 [ocupado por PQ-201]
+A-02 [libre]
+A-03 [libre]
+
+Opción: 0
+Hasta luego.
